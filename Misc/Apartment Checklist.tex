@@ -1,0 +1,95 @@
+\documentclass{article}
+\usepackage{amssymb}
+\usepackage{verbatim}
+\usepackage{fullpage}          		% fullpage margins
+
+\usepackage[ampersand]{easylist}
+
+\newcommand{\tab}{\hspace{.2\textwidth}}
+
+\begin{document}
+\title{Apartment Checklist}
+\author{Hai.D.}
+\maketitle
+
+List of things to do:\\
+\begin{easylist}[checklist]
+	\ListProperties(Hide=100, Hang=true, Progressive=10ex, 
+		Style*= {$\square$} ,
+		Style2*= $\bullet$,
+		Style3*= --)
+		
+	& Lots of pics of everything from multi angles
+    & Check light switches
+    & Check cold/hot water pressure of all faucets and shower %(in psi units)
+    & Flush Toilet %(check direction of water spin)
+    & Check the Stove %(cook breakfast)
+    & Look for signs of Pest%(check cabinets? : Make mating calls) 
+    & Check outlets with phone charger 
+    & Maybe ask why the current tennants are leaving/have left?  
+    & Ask about the neighbors.
+	& Landlord Information
+    && Name
+    && Contact \#
+	& Other information:
+	&& 
+	&&
+	& When you are viewing the studio, let him know you're doing it for a friend.
+    & At the end please ask about the application process and mention that he will have a cosigner 	
+	\\\\
+\end{easylist}
+
+List of things to ask and check for:\\
+\begin{easylist}[checklist]
+	\ListProperties(Hide=100, Hang=true, Progressive=10ex, 
+		Style*= {$\square$ $\square$}  ,
+		Style2*= $\bullet$,
+		Style3*= -- )
+
+    & Is it possible to trip a breaker? Short a fuse?
+
+    & Check appliances if any 
+    && refrigerator
+    && stove/oven
+    && microwave
+    & Quiet hours
+    & Water heater (Is it shared? Where is it? Case scenario it breaks?)
+    & Fire escape / Fire detectors / Carbon monoxide detectors
+    & Is a bed provided?
+    & What can you tell me about the neighbors?
+    & Are windows working and well sealed?  
+    & The floor -(clean carpet?) 
+    & Lock on main door
+    & Garbage removal
+    & Parking
+    & Laundry facilities(clean? How far?) 
+    & Comfortable overall? (wear pajama pants)
+    & Security Deposit
+    & Upfront Deposit?
+    & First Month's/Last Month's Rent
+    & Renter's Insurance or Additional fees?
+    & Late fee
+    & Leasing Details
+    & Amenities and Accomodations
+    && Wifi
+    && AC
+    && Heating
+    & Bills 
+    && Water
+    && Heating
+    && Electricity
+    && Internet/Cable
+    && Gas
+    & Elevator
+    & Mailroom   
+    \\    
+\end{easylist}
+
+
+
+
+
+%\mbox{\ooalign{$\checkmark$\cr\hidewidth$\square$\hidewidth\cr}}
+%\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{0.1em}$\checkmark$}
+
+\end{document}
