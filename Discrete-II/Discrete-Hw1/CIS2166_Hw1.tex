@@ -1,0 +1,342 @@
+\documentclass[fleqn]{article}
+\usepackage[]{amsmath, amssymb} 	%math formatting and symbols
+\setlength{\mathindent}{0pt}
+\usepackage{fullpage}          		% fullpage margins
+\usepackage{verbatim}					
+\usepackage{arrayjobx}				%provides array as a data structure
+\usepackage{ifthen}					%for if statements
+\usepackage{multido}				%looping with multiple conditions
+\usepackage{amsthm} 				%used for theorems & proofs
+
+\usepackage{algorithm}				%for writing in algorithm form
+\usepackage{algpseudocode}
+\newcommand{\tab}[1]{\hspace{.2\textwidth}\rlap{#1}}
+
+
+\begin{document}
+\title{Math Concepts in Computing II CIS 2166: Hw 1}
+\date{September 2, 2016}
+\author{Hai Dang}
+\maketitle
+
+\begin{enumerate}
+\item[3.1.14)]
+List all the steps used to search for 7 in the sequence given
+in Exercise 13 for both a linear search and a binary search.
+\\
+1, 3, 4, 5, 6, 8, 9, 11
+	%Note: arrayjobx package naming convention must not include numbers in array name
+	\newarray\Values
+	\readarray{Values}{1&3&4&5&6&8&9&11}
+	%\checkValues(0)%
+    %\Values(3)
+    \begin{enumerate}
+    \item %a
+    	Linear Search:
+    	\newcommand{\num}{7}
+    	\newcommand{\length}{9} %  <= DNE
+    	\newcounter{i}
+    	\setcounter{i}{1}
+    	\newcounter{pt}
+    	\setcounter{pt}{1}
+    	
+    	\whiledo{\value{i} < \length }{%
+    		\ifnum \Values(\the\value{i}) = \num
+    			%trick for if statements since only limited to <, > , =
+    			%else part can be used for != 
+    			\\
+    		\else %array value != 7
+    			\arabic{pt}. Set counter to \arabic{i}.
+    			\stepcounter{pt}
+    			\newline
+    			\arabic{pt}. Compare counter \arabic{i} to size of list 8.
+    			\stepcounter{pt}
+    			\newline
+    			\arabic{pt}. Then compare 7 to \Values(\arabic{i}), the value in the array.
+    			\stepcounter{pt}
+    			\newline
+    			\arabic{pt}. Since counter \arabic{i} $\leq$ 8 and values 7 $\neq$
+    			 \Values(\arabic{i}) then increment counter by 1.
+    	    	\stepcounter{i}
+    	    	\stepcounter{pt}
+    	    	\newline
+    		\fi
+    	}    	
+    	\arabic{pt}. Since counter \arabic{i} > size of list 8. Exit the loop.
+		\stepcounter{pt}		
+		\newline    	
+    	\arabic{pt}. Compare the counter \arabic{i} to the size of list 8.
+    	\stepcounter{pt}
+    	\newline
+    	\ifnum \the\value{i} < \length - 1		
+    		\arabic{pt}. Since \arabic{i} $<$ 8, number is found. Return index \the\value{i} 
+    	\else
+    		\arabic{pt}. Since \arabic{i} $>$ 8, number not found in array: return 0
+    	\fi
+	\delarray\Values
+    \item %b
+   		Binary Search: 	
+  			\begin{enumerate}
+  				\item[1.]
+  				Set counter i to 1 for the lowest index.
+  				\item[2.]
+  				Set counter j to 8 being the size of the largest array index.
+  				\item[3.]
+  				Compare the counters with values 1 and 8.
+  				\item[4.]
+  				Since for the counters 1 $<$ 8, enter the loop.
+  				\item[5.]
+  				Compute midpoint as the floor of (1+8)/2 which is 4
+  				\item[6.]
+  				Then compare the value 7 to 5, the value in the array.
+  				\item[7.]
+  				Since 7 $>$ 5, set the i counter to 5.
+  				\item[8.]
+  				Compare the counters with values 5 and 8.
+  				\item[9.]
+  				Since for the counters 5 $<$ 8, enter the loop.
+  				\item[10.]
+  				Compute midpoint as the floor of (5 + 8)/2 which is 6.
+  				\item[11.]
+  				Then compare the value 7 to 8, the value in the array.
+  				\item[12.]
+  				Since 7 $<$ 8, set the j counter to 6.
+  				\item[13.]
+  				Compare the counters with values 6 and 8.
+  				\item[14.]
+  				Since for the counters 6 $<$ 8, enter the loop.
+  				\item[15.]
+  				Compute midpoint as the floor of (6 + 8)/2 which is 7.
+  				\item[16.]
+  				Then compare the value 7 to 9, the value in the array.
+  				\item[17.]
+  				Since 7 $<$ 9, set the j counter to 7.
+  				\item[18.]
+  				Compare the counters with values 7 and 7.
+  				\item[19.]
+  				Since 7 is not $<$ 7 exit the loop.
+  				\item[20.]
+  				Compare 7 with array value 9 at location 7.
+  				\item[21.]
+  				Since 7 $\neq $ 9, number not found in array: return 0.
+  				
+  			\end{enumerate}
+    \end{enumerate}
+    
+\item[3.1.28)]
+Specify the steps of an algorithm that locates an element
+in a list of increasing integers by successively splitting
+the list into four sublists of equal (or as close to equal as
+possible) size, and restricting the search to the appropriate
+piece.
+
+\begin{comment}
+procedure binary search (x: integer, a1, a2, . . . , an: increasing integers)
+i := 1{i is left endpoint of search interval}
+j := n {j is right endpoint of search interval}
+while i < j
+m := (i + j)/2
+if x > am then i := m + 1
+else j := m
+if x = ai then location := i
+else location := 0
+return location{location is the subscript i of the term ai equal to x, or 0 if x is not found}
+\end{comment}
+
+\begin{algorithm} 
+	\caption {Quaternary Search} 
+	\begin{algorithmic}[1]
+	\Procedure{}{$x$ : integer, $a_1, a_2, ... , a_n$ : increasing integers}
+	\State $i \gets 1$
+	\State $j \gets n$
+	\While{$i < j$}	
+	    \State $lq = \lfloor (i + j)/4 \rfloor$ 	\Comment{Lower Quarter}
+		\State $mid = \lfloor (i + j)/2 \rfloor$ 	\Comment{Middle}
+		\State $uq = \lfloor 3(i + j)/4 \rfloor$ 	\Comment{Upper Quarter}
+		\\
+		\If{$x > a[mid]$}					\Comment{Upper half, greater than the midpt}
+			\If{$x > a[uq]$}				
+				\State $i \gets uq+1$		\Comment{range is from i = uq+1 to j = rightmost}
+		     \Else 							
+		     	\State $i \gets m + 1$ 		\Comment{range is from i = m+1 to j = uq}
+		     	\State $j \gets uq$
+		     \EndIf
+		
+		\Else								\Comment{Lower half, less than and equal to midpt}
+			\If{$x > a[lq]$}
+				\State $i \gets lq + 1$		\Comment{range is from i = lq+1 to j = m}
+				\State $j \gets m$			
+			\Else
+				\State $j = lq$				\Comment{range is from i = leftmost to j = lq}
+			\EndIf
+		\EndIf
+
+		\\
+	\EndWhile
+	\\
+	\If {$x = a_i$}
+		\State $location \gets i$	\Comment{Set location to index i}
+	%\ElsIf{$x = a_j$}
+	%	\State $location \gets j$ 	\Comment{Set location to index j}
+	\Else	
+		\State $location \gets -1$	\Comment{x is not found in list}
+	\EndIf
+	\\
+	\Return $location$
+	\EndProcedure
+	\end{algorithmic}
+\end{algorithm}
+
+
+
+
+
+
+\begin{algorithm}
+\item[3.1.44)]    
+Describe an algorithm based on the binary search for determining
+the correct position in which to insert a new
+element in an already sorted list.
+\\
+		\caption {Binary Search Insert} 
+	\begin{algorithmic}[1]
+	\Procedure{}{$x$ : integer, $a_1, a_2, ... , a_n$ : increasing integers}
+	\State $i \gets 1$
+	\State $j \gets n$
+	\While{$i < j$}	
+		\State $m = \lfloor (i + j)/2 \rfloor$ 	\Comment{Middle}
+		\If{$x > a_m$}
+			\State $i \gets m+1$
+		\Else
+			\State $j \gets m$
+		\EndIf
+
+	\EndWhile
+	\\
+	\If {$x = a_i$}
+		\State $location \gets i$		\Comment{Set location to index i}
+	\Else	
+		\State $location \gets i$	\Comment{Get the position where x should be inserted}
+		
+		\For {$i \gets n + 1 $ \bf to $ location, $ \bf decrement $ i$} 
+		
+		\State $arr_i \gets arr_{i-1}$ 	\Comment{Copy over values at higher index to lower index}
+		\State\Comment{to occupy i+1 to n+1}
+			
+		\EndFor
+		\State $arr_{location} \gets x$	\Comment{Insert value x into the empty }
+	\EndIf
+	
+		
+	
+	\EndProcedure
+	\end{algorithmic}
+\end{algorithm}
+
+\end{enumerate}
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%------------------------------------------------------------------------------------------
+
+\begin{comment}
+    	Problem 3.14 A
+    	\count255 = 1
+    	\loop
+    		\text Set counter to 1.
+    		\ifnum\count255 < 10 
+    		\advance\count255 by 1
+    	\repeat
+    	\end{comment}
+		\begin{comment}
+		\newcommand{\num}{7}	%value to search
+    	\newcommand{\length}{9} %length of array  (<= DNE)
+		\multido{\i=0+1}{\length}{
+    	   \text Hello
+    	}
+		\end{comment}
+    	 
+    	 
+    	 
+    	\begin{comment}
+   		\begin{enumerate}
+   			\item[1.]
+   			Set counter to 1.  
+   			\item[2.]
+   			Compare counter 1 to size of list 8				
+   			\item[3.]
+   			Then compare 7 to 1, the first value in the set.
+   			\item[4.]
+   			Since counter 1 $\leq$ 8 and values 7 $\neq$ 1 then increment counter by 1.
+   			\item[5.]
+   			Compare counter 2 to size of list 8				
+   			\item[6.]
+   			Then compare 7 to 3, the first value in the set.
+   			\item[7.]
+   			Since counter 2 $\leq$ 8 and values 7 $\neq$ 3 then increment counter by 1.
+   		\end{enumerate}
+   		\end{comment}
+
+		\begin{comment}
+  		\begin{enumerate}
+   			\item[1.] %\number\count3
+   			\item[2.]
+   			\item[3.]
+   		\end{enumerate}
+		\end{comment}
+%-----------------------------------------------------------------------------------
+		%TODO: Work on globalization for Binary Search when I have more time
+   		%Still working on implementing. For some reason, exceeds memory 
+   		%\Values(\count3) should have worked;
+   		\begin{comment}
+		\newcounter{low}
+		\setcounter{low}{0}
+		\newcounter{high}
+		\setcounter{high}{9}
+		\count3 = 2
+		%\setcounter{low}{\count3}
+		%\arabic{low}
+   		
+   		%\Values(\count3)
+   		\whiledo{\value{low} < \value{high}}{%
+   			%get the index midpt
+   		    \count3 = \the\value{high} + \the\value{low}
+			\divide\count3 by 2
+   			
+	 			
+   			\ifnum \num > \Values(\number\count3)  %if num > midpt -> get upper half
+   		        %set low to the midpt + 1
+   		    	\setcounter{low}{\count3 + 1}
+   		    	higher
+   		    	-- \number\count3 : \arabic{low} \arabic{high} --
+   		    	
+   		    \else  %if num < midpt  ->  get lower half
+   		    	%set high to midpt
+   		    	\setcounter{high}{\count3}
+   		    	lower
+   		    	-- \number\count3 : \arabic{low} \arabic{high} --
+   		    	
+   			\fi
+   		}
+   		\end{comment}
