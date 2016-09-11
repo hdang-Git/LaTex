@@ -1,0 +1,246 @@
+\documentclass[fleqn]{article}
+\usepackage[]{amsmath, amssymb} 	%math formatting and symbols
+\setlength{\mathindent}{0pt}
+\usepackage{fullpage}          		% fullpage margins
+\usepackage{verbatim}
+\usepackage{amsthm} 				%used for theorems & proofs
+\usepackage{tabulary}				%used for tables
+\usepackage{multirow}				%used for tables with multiple rows
+
+\newcommand{\tab}[1]{\hspace{.2\textwidth}\rlap{#1}}
+
+\begin{document}
+\title{Probability \& Statistics CIS 2033: Hw 2}
+\date{February 10, 2016}
+\author{Hai Dang}
+\maketitle
+
+\begin{enumerate}
+\item[2.30]
+Consider the situation described in Example 2.24 on p. 22, but this time let us define the
+sample space clearly. Suppose that one child is older, and the other is younger, their gender is independent of their age, and the child you meet is one or the other with probabilities 1/2 and 1/2.
+    \begin{enumerate}
+    \item %a
+    List all the outcomes in this sample space. Each outcome should tell the children’s
+    gender, which child is older, and which child you have met.
+    	\begin{flalign*}
+    	&\Omega = \{B_{O}B_{Y}, B_{Y}B_{O}, \;B_{O}G_{Y}, B_{Y}G_{O}, \;G_{O}B_{Y}, G_{Y}						B_{O}, G_{O}G_{Y},G_{Y}G_{O}\}  
+    	\\
+    	&where\;B := Boy,\;G := Girl, \;O:= Older, \;Y:= Younger  
+    	%\\   
+    	%&Order\;\{AB\} := A \;is\; met\; first,\; B\; is\; met\; second
+%recheck this    	    	
+    	\end{flalign*}
+    \item %b
+    Show that unconditional probabilities of outcomes BB, BG, and GB are equal
+    	\begin{flalign*}
+    	P(B_{O}B_{Y}, B_{Y}B_{O}) = \frac{2}{8} = \frac{1}{4}
+    	\\
+    	P(B_{O}G{Y}, B_{Y}B_{O}) = \frac{2}{8} = \frac{1}{4}
+		\\    	
+    	P(G_{O}G{Y}, G_{Y}B_{O}) = \frac{2}{8} = \frac{1}{4}
+    	\end{flalign*} 
+    \item %c
+    Show that conditional probabilities of BB, BG, and GB, after you met Leo, are not
+	equal.
+    	\begin{flalign*}
+    	P(BB|B) = \frac{P(BB\cap B)}{P(B)} = \frac{1/2}{1} = \frac{1}{2}
+    	\\
+    	P(BG|B) = \frac{P(BG\cap B}{P(B)} = \frac{1/4}{1} = \frac{1}{4}
+		\\    	
+    	P(GB|B) = \frac{P(G\cap B)}{P(B)}= \frac{1/4}{1} = \frac{1}{4}
+    	\end{flalign*}
+    \item %d
+    Show that the conditional probability that Leo has a brother is 1/2.
+    	\begin{flalign*}
+    	P(BB|Leo) = P(BB|B) = \frac{P(BB\cap B)}{P(B)} = \frac{\frac{2}{4}}{1} 
+    	= \frac{1}{2}
+    	\end{flalign*}
+    \end{enumerate}
+    
+\item [2.36]
+Prove "subadditivity": $P\{E_{1}, E_{2}, ...\} \leq \Sigma P\{E_i\}  $ for any events $\epsilon\;\mathfrak{M}$
+
+	\begin{proof}
+	$   
+	\\LS
+	\\ =P\{E_1 \cup E_2 \cup ...\}
+	\\ =P\{E_1 + E_2 + ...\}
+	\\ = P\{E_1\}+P\{E_2\} + ...
+	\\ \leq \Sigma P\{E_i\}
+	\\ = RS
+	$
+	\qedhere
+	\end{proof}
+
+\item [3.7]
+The number of home runs scored by a certain team in one baseball game is a random variable with the distribution
+
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+	\hline
+	x    &0   &1    &2\\
+	\hline
+	P(x) &0.4 & 0.4 &0.2\\
+	\hline
+	\end{tabular}
+	\\[3ex]		%extra newlines option
+	\raggedright
+
+The team plays 2 games. The number of home runs scored in one game is independent of
+the number of home runs in the other game. Let Y be the total number of home runs. Find
+E(Y ) and Var(Y ).
+
+	\begin{enumerate}
+		\item %a
+		\begin{flalign*}
+		&E(X) =\sum\limits_{i=0}^2(x_i)P(x_i)= 0(0.4)+1(0.4)+2(0.2) \\
+		&E(Y) = 2 * E(X) = 2(0.8) = 1.6
+		\end{flalign*}
+		
+		\item %b
+		\begin{flalign*}
+		&Var(X) = \sum\limits_{i=0}^2 (x_i - E(x_i))^2 *P(X) 
+		= (0-0.8)^2*(0.4) + (1 - 0.8)^2*(0.4)+(2-0.8)^2*(0.2) = 0.56
+		\\
+		&Var(Y) = 2 * Var(X) = 2(0.56) = 1.12
+		\end{flalign*}
+	\end{enumerate}
+
+\item[3.11]
+Two dice are tossed. Let X be the smaller number of points. Let Y be the larger number
+of points. If both dice show the same number, say, z points, then X = Y = z.
+	
+	
+
+	\begin{enumerate}
+	\item %a
+	Find the joint probability mass function of (X, Y ).
+	
+		\begin{tabular}{|cc|c|c|c|c|c|c|c|}
+		
+		\cline{1-9}
+		& & \multicolumn{6}{c|}{Y}  &
+		\multicolumn{1}{c|}{\multirow{2}{*}{p(X)}} 	\\  \cline{1-8}
+		& &1 &2 &3 &4 &5 &6 &|		    \\	\cline{3-9}
+		
+
+		\multicolumn{1}{|c}{\multirow{6}{*}{X}}		&
+		\multicolumn{1}{|c|}{1}		
+		& $\frac{1}{36}$  & $\frac{1}{18}$ & $\frac{1}{18}$
+		& $\frac{1}{18}$  & $\frac{1}{18}$ & $\frac{1}{18}$		
+		& $\frac{11}{36}$										\\ \cline{3-9} &
+		\multicolumn{1}{|c|}{2}
+		&0 				  & $\frac{1}{36}$ & $\frac{1}{18}$ 
+		& $\frac{1}{18}$  & $\frac{1}{18}$ & $\frac{1}{18}$		
+		& $\frac{9}{36}$										\\ \cline{3-9} &
+		\multicolumn{1}{|c|}{3}
+		&0 				  & 0			   & $\frac{1}{36}$ 
+		& $\frac{1}{18}$  & $\frac{1}{18}$ & $\frac{1}{18}$		
+		& $\frac{7}{36}$										\\ \cline{3-9} &
+		\multicolumn{1}{|c|}{4}
+		&0 				  & 0			   & 0
+		& $\frac{1}{36}$  & $\frac{1}{18}$ & $\frac{1}{18}$		
+		& $\frac{5}{36}$										\\ \cline{3-9} &
+		\multicolumn{1}{|c|}{5}
+		&0 				  & 0 				& 0
+		& 0				  & $\frac{1}{36}$ & $\frac{1}{18}$		
+		& $\frac{3}{36}$										\\ \cline{3-9} &
+		\multicolumn{1}{|c|}{6}
+		&0 				  & 0			   & 0 
+		&0				  & 0			   & $\frac{1}{36}$		
+		& $\frac{1}{36}$										\\ \cline{1-9} &
+		\multicolumn{1}{c|}{p(Y)}
+		& $\frac{1}{36}$	& $\frac{3}{36}$	& $\frac{5}{36}$
+		& $\frac{7}{36}$	& $\frac{9}{36}$	& $\frac{11}{36}$ 
+		& 1
+																\\  \cline{1-9}	
+		\end{tabular}	
+	 
+	\item %b
+	Are X and Y independent? Explain.
+	\\No, X and Y are dependent.
+		\begin{flalign*}		
+		p(1, 1)= \frac{1}{36} \neq \frac{11}{36}*\frac{1}{36} = p(X)p(Y)
+		\end{flalign*}
+		
+	\item %c
+	Find the probability mass function of X.
+		\\		
+		\begin{tabular}{cc|c|c|c|c|c|c}
+		\multicolumn{2}{c|}{X}
+		&1 	&2 	&3 	&4 	&5 	&6 									\\ \cline{1-8}	
+		\multicolumn{2}{c|}{p(X)} 
+		& $\frac{11}{36}$	& $\frac{9}{36}$	& $\frac{7}{36}$
+		& $\frac{5}{36}$ 	& $\frac{3}{36}$	& $\frac{1}{36}$
+		\end{tabular}
+	\item %d
+	If X = 2, what is the probability that Y = 5?
+		\begin{flalign*}
+		P(Y=5|X=2) = \frac{P(Y=5\cap X=2)}{P(X=2)} = \frac{p(X=2, Y=5)}{p(X=2)} 
+				   = \frac{1/18}{9/36} = \frac{2/36}{9/36} = \frac{2}{9}
+		\end{flalign*}
+		
+		
+		
+		
+	\end{enumerate}
+
+\item [3.15]
+Let X and Y be the number of hardware failures in two computer labs in a given month.
+The joint distribution of X and Y is given in the table below.
+
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|}
+
+		\cline{1-5}
+		\multicolumn{2}{|c}{\multirow{2}{*}{P(x,y)}}	&  
+		\multicolumn{3}{|c|}{x}						\\ 	\cline{3-5}
+		 & &0 &1 &2 \\	\cline{1-5}	
+		 
+		\multicolumn{1}{|c|}{\multirow{3}{*}{y}}  & 
+		\multicolumn{1}{c|}{0} &0.52 &0.20 &0.04	\\ \cline{2-5}  &
+		\multicolumn{1}{c|}{1} &0.14 &0.02 &0.01	\\ \cline{2-5}  &
+		\multicolumn{1}{c|}{2} &0.06 &0.01 &0		\\ \cline{1-5}
+		
+		\end{tabular}
+	\end{center}
+	
+	\begin{enumerate}
+		\item %a
+		Compute the probability of at least one hardware failure.\\
+			P(at least 1 hardware failure) 				\\
+			= 1 - P(at most 0 hardware failure)			\\
+			= 1 - p(X=0, Y=0) 							\\
+			= 1 - 0.52 = 0.48			
+		
+		\item %b
+		From the given distribution, are X and Y independent? Why or why not?	\\
+		\begin{center}
+			\begin{tabular}{|cc|c|c|c|c|cc|}
+
+			\cline{1-7}
+			\multicolumn{2}{|c}{\multirow{2}{*}{p(X,Y)}}	&  
+			\multicolumn{3}{|c|}{x}							&
+			\multicolumn{2}{c|}{\multirow{2}{*}{p(Y)}} 
+														\\ 	\cline{3-5}
+		 	& &0 &1 &2 									\\	\cline{1-7}	
+
+		 
+			\multicolumn{1}{|c}{\multirow{3}{*}{y}}  & 
+			\multicolumn{1}{|c|}{0} &0.52 &0.20 &0.04 	 &0.76	\\ \cline{2-6}  &
+			\multicolumn{1}{|c|}{1} &0.14 &0.02 &0.01 	 &0.17	\\ \cline{2-6}  &
+			\multicolumn{1}{|c|}{2} &0.06 &0.01 &0	  	 &0.07	\\ \cline{1-6}
+			\multicolumn{2}{|c|}{p(X)} &0.72 &0.23 &0.05 &1		\\	\cline{1-6}
+			\end{tabular}
+		\end{center}		
+		
+		No. X and Y are dependent.
+		\begin{flalign*}		
+		p(X=0, Y=0)= 0.52 \neq (0.76)(0.72) = p(X)p(Y)
+		\end{flalign*}
+		
+	\end{enumerate}
+
+\end{enumerate}
+\end{document}
