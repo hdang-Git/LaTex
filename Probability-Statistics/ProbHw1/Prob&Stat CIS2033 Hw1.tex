@@ -1,0 +1,186 @@
+\documentclass[fleqn]{article}
+
+\usepackage[]{amsmath, amssymb} 	%mathformatting and symbols
+\setlength{\mathindent}{0pt}
+%\usepackage{graphicx}           % insert graphics
+%\usepackage{eulervm, bookman}   % fonts for math & symbols
+\usepackage{fullpage}          % fullpage margins
+\usepackage{verbatim}
+\begin{document}
+\title{Probability \& Statistics CIS 2033: Hw 1}
+\date{January 24, 2016}
+\author{Hai Dang}
+
+\maketitle
+
+\begin{enumerate}
+	\item[2.4.]
+ 	Among employees of a certain firm, 70\% know C/C++, 60\% know Fortran, and 50\% know
+	both languages. What portion of programmers
+	\begin{comment}	
+		\\
+		\begin{flalign*}
+ 		Let\;F:=\;know\;Fortran,\;C:=\;know\;C/C+\!+,\;and\;B :=\;know\;both
+ 		\end{flalign*}
+ 	\end{comment}
+ 	\begin{enumerate}
+ 		\item %a
+ 			does not know Fortran?
+ 			\begin{flalign*}
+ 			P(not\;Fortran) = P(\overline{F}) = 1 - P(F) = 1 - 0.6 = 0.4
+ 			\end{flalign*}
+ 			%P(\bar{F}) for negation but now using \overline{}
+ 		\item %b
+ 			does not know Fortran and does not know C/C++?
+ 			\begin{flalign*}
+ 			&P(not\;Fortran\;\&\;not\;C/C+\!+) \\
+ 			&= P(\Omega)-[P((\overline{F} \cup (\overline{C/C+\!+}))/(both))] \\
+ 			&= P(\Omega)-[P(Fortran)+ (P(C/C+\!+)-P(both)] \\
+ 			&= 1-(0.7+0.6-0.5) = 1 - 0.8 = 0.2
+ 			\end{flalign*}	
+ 			
+		\paragraph{}
+		\underline R: Or is the question asking P(does not know both)? 	
+ 			
+ 			\begin{comment}
+ 			\begin{flalign*}
+ 			P(not\;Fortran\;\&\;not\;C/C+\!+) = P(\overline{both}) = 1 - 0.5 = 0.5
+ 			\end{flalign*}	
+ 			\end{comment}	
+ 			
+ 		\item %c
+ 			knows C/C++ but not Fortran?
+ 			\begin{flalign*}
+ 			P(C/C+\!+ \;\;/ Fortran) = P(C/C++)-P(both) = 0.7-0.5=0.2
+ 			\end{flalign*}
+ 		\item %d
+ 			knows Fortran but not C/C++?
+ 			\begin{flalign*}
+ 			P(Fortran\;/\;C/C+) = P(Fortran)-P(both) = 0.6 -0.5 = 0.1
+ 			\end{flalign*}
+ 		\item %e
+ 			If someone knows Fortran, what is the probability that he/she knows C/C++ too?
+ 			\begin{flalign*}
+ 			P(C/C+\!+\;|Fortran) = \frac{P(C/C+\!+\;\cap\;Fortran)}{P(Fortran)} 
+ 			= \frac{0.5}{0.6} = \frac{5}{6}
+ 			\end{flalign*}
+ 		\item %f
+ 			If someone knows C/C++, what is the probability that he/she knows Fortran too?
+ 			\begin{flalign*}
+ 			P(Fortran|\;C/C+\!+) = \frac{P(Fortran \;\cap\; C/C+\!+)}{P(C/C+\!+)} 
+ 			= \frac{0.5}{0.7} = \frac{5}{7}
+ 			\end{flalign*}
+ 	\end{enumerate}
+
+
+% --------------------------------------------------------------------------------------
+ 	
+ 	\item[2.7.]
+    A system may become infected by some spyware through the internet or e-mail. Seventy
+    percent of the time the spyware arrives via the internet, thirty percent of the time 	    via email.
+    If it enters via the internet, the system detects it immediately with probability            	0.6.
+	If via e-mail, it is detected with probability 0.8. What percentage of times is this 		spyware detected?
+	\begin{flalign*}
+	Let\;&I:=spyware\;via\;internet,\;E:= spyware\;via\; email,\\&D:=spyware detected by system
+	\end{flalign*}
+	\begin{flalign*}
+	&Givens: P(I)=0.7,\;P(E)=0.3, P(D|I)=0.6, P(D|E) = 0.8\\\\
+	&P(D|I)= \frac{P(D\cap I)}{P(I)} \rightarrow P(D\cap I)=P(I)P(D|I) =0.6*0.7=0.42\\
+	&P(D|E)= \frac{P(D\cap E)}{P(E)} \rightarrow P(D\cap E)=P(E)P(D|I)= 0.8*0.3=0.24\\
+	&P(D) =P(I)P(D|I)+P(D\cap E)) = 0.66
+	\end{flalign*}
+ 	
+% --------------------------------------------------------------------------------------
+	\item[2.11.]
+	A computer program is tested by 5 independent tests. If there is an error, these 	 	  	tests
+ 	will discover it with probabilities 0.1, 0.2, 0.3, 0.4, and 0.5, respectively. 	 	 	 	Suppose that the
+	program contains an error. What is the probability that it will be found
+	\paragraph{}
+	Given: T1 = 0.1, T2 = 0.2, T3 = 0.3, T4 = 0.4, T5 = 0.5
+	\begin{enumerate}
+	\item %a
+	by at least one test?
+	\begin{flalign*}
+	&P(at\;least\;one\;test)=P(T1\cup T2\cup T3\cup T4\cup T5) 
+	%= 1 - P(no error detected)
+	= 1 - P(\overline{T1\cup T2\cup T3\cup T4\cup T5})\\
+	&= 1 - P(\overline{T1}\cap \overline{T2}\cap \overline{T3}\cap \overline{T4}\cap 	
+	\overline{T5}\cap)
+	= 1 - 
+	P(\overline{T1})P(\overline{T2})P(\overline{T3})P(\overline{T4})P(\overline{T5})\\
+	&= 1 - P(1-T1)P(1-T2)P(1-T3)P(1-T4)P(1-T5)\\
+	&= 1 - (1-0.1)(1-0.2)(1-0.3)(1-0.4)(1-0.5) = 0.8488	
+	\end{flalign*}
+	
+	\item %b
+	by at least two tests?
+	\begin{flalign*}
+	&P(at\;least\;two\;tests)
+	= 1- P(\overline{T1\cup T2\cup T3\cup T4\cup T5})-
+	P(T1 \cap \overline{T2} \cap \overline{T3} \cap \overline{T4} \cap \overline{T5})\\
+	&-P(\overline{T1} \cap T2 \cap \overline{T3} \cap \overline{T4} \cap \overline{T5})
+	-P(\overline{T1} \cap \overline{T2} \cap T3 \cap \overline{T4} \cap \overline{T5})
+	-P(\overline{T1} \cap \overline{T2} \cap \overline{T3}  \cap T4 \cap \overline{T5})\\
+	&-P(\overline{T1} \cap \overline{T2} \cap \overline{T3} \cap \overline{T4}\cap T5)
+	\\
+	&= P(at\;least\;one\;)-P(T1)P(\overline{T2})P(\overline{T3})P(\overline{T4})    	 		     P(\overline{T5}) -... - P(\overline{T1})P(\overline{T2})P(\overline{T3})P( 
+	\overline{T4})P(T5)
+	\\
+	%&=1-0.8488- P(T1)P(1-T2)P(1-T3)P(1-T4)P(1-T5)-...-P(1-T1)P(1-T2)
+	%P(1-T3)P(1-T4)P(1-T5)\\
+	&= 0.8488 - 0.0168-0.0378-0.0648-0.1008-0.1512 = 0.4774
+	\end{flalign*}
+
+	\item %c
+	by all five tests?
+	\begin{flalign*}
+	&P(all\;five\;tests)= {(T1\cap T2\cap T3\cap T4\cap T5)} = P(T1)P(T2)P(T3)P(T4)P(T5)
+	\\
+	&= (0.1)(0.2)(0.3)(0.4)(0.5)= 0.0012 
+	\end{flalign*}
+	
+	 
+	\end{enumerate}
+% --------------------------------------------------------------------------------------	
+	\item[2.13.]
+	An important module is tested by three independent teams of inspectors. Each team 
+	detects a problem in a defective module with probability 0.8. What is the probability 
+	that at least one team of inspectors detects a problem in a defective module?
+	\paragraph{}
+	Let T1 = team 1, T2 = team 2, T3 = team 3  where P(T1) = P(T2) = P(T3) = 0.8 
+	\begin{flalign*}	
+	&P(at\;least\;one\;team\;detects\;a\;problem\;in\;defective\;module)\\
+	&= P(T1 \cup T2 \ T3) = 1 - P(\overline{T1}\cap\overline{T2}\cap\overline{T3}) \\
+	&= 1 - P(\overline{T1})^{3}
+	= 1 - (1 - T1)^{3} = 1 - (1-0.8)^{3} = 1 - (.2)^{3} = 0.992
+	\end{flalign*} 
+
+% --------------------------------------------------------------------------------------	
+	\newpage	
+	\item[2.16.]
+	A computer maker receives parts from three suppliers, S1, S2, and S3. Fifty percent 
+	come from S1, twenty percent from S2, and thirty percent from S3. Among all the parts 
+	supplied by S1, 5\% are defective. For S2 and S3, the portion of defective parts is 
+	3\% and 6\%, respectively.
+	\paragraph{}
+	Givens: P(S1) = 0.5, P(S2) = 0.2, P(S3) = 0.3; 
+	\\P(D \vline\;S1) = 0.05,\; P(D\vline\;S2) = 0.03, \;P(D\vline\;S3) = 0.06
+	
+	\begin{enumerate}
+	\item %a
+	What portion of all the parts is defective?
+	\begin{flalign*}
+	P(D) = P(S1)P(D|S1)+P(S2)P(D|S2)+P(S3)P(D|S3) = 0.5(0.05)+0.2(0.03)+0.3(0.06)=0.049
+	\end{flalign*}
+	\item %b
+	A customer complains that a certain part in her recently purchased computer is 
+	defective. What is the probability that it was supplied by S1?
+	\begin{flalign*}
+	P(D|S1) = \frac{P(S1|D)P(S1)}{P(D)} = \frac{(0.05)(.5)}{0.049} = 0.510
+	\end{flalign*}
+	\end{enumerate}
+	
+\end{enumerate}
+
+
+\end{document}
